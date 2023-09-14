@@ -1,0 +1,12 @@
+# Projects files
+coverage/*
+node_modules/
+secrets/*
+!secrets/.gitkeep
+development/
+logs/*
+
+# IDE - VSCode
+.vscode/*
+
+.env

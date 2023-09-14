@@ -1,0 +1,39 @@
+name: Master Branch
+
+on:
+  push:
+    branches: ['master']
+  pull_request:
+    branches: ['master']
+  workflow_dispatch:
+env:
+  JWT_ALGO: ${{ vars.JWT_ALGO }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install jose CLI
+        run: npm install jose-cli -g
+
+      - name: Create random key pair
+        run: cd secrets && jose generate:keypair ${{ vars.JWT_ALGO }} --save Key
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Run test
+        run: npm test
