@@ -7,6 +7,7 @@ const CLITable3 = require('cli-table3');
 const listEndpoints = require('express-list-endpoints');
 
 const routes = require('./src/routes');
+const websocket = require('./src/websocket');
 const { debug, logger } = require('./config');
 
 async function boostrap() {
@@ -40,6 +41,7 @@ async function boostrap() {
       }
     };
 
+    websocket.io.attach(server);
     loadEndpoint();
 
     logger.info(`Started on port ${addr.port}`);
