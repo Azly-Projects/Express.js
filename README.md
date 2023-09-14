@@ -46,7 +46,8 @@ project/
 │   ├── helper/
 │   ├── middleware/
 │   ├── routes/
-│   └── validators/
+│   ├── validators/
+│   └── websocket/
 └── tests/
 ```
 
@@ -63,6 +64,8 @@ project/
    - **routes**: This directory contains the route handlers for different API endpoints. Each route handler can be a separate file or organized based on the related functionality.
 
    - **validators**: Input validation is crucial for ensuring data integrity and security. This directory typically contains validation functions or modules for validating the incoming data.
+
+   - **websocket**: This directory can be used to house the Socket.IO-related logic for your application. Within this directory, you can have several files.
 
 4. **tests**: Unit tests, integration tests, and other types of tests for your application are usually placed in this directory. Organizing tests in a structured manner can help maintain a clean and efficient test suite.
 
