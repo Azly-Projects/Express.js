@@ -8,6 +8,7 @@ const listEndpoints = require('express-list-endpoints');
 
 const routes = require('./src/routes');
 const { debug, logger } = require('./config');
+const models = require('./src/models');
 
 async function boostrap() {
   let server;
@@ -21,6 +22,8 @@ async function boostrap() {
   } else {
     server = http.createServer(routes);
   }
+
+  await models.sequelize.sync({ alter: true });
 
   // listening event
   server.on('listening', () => {

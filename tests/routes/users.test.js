@@ -12,7 +12,9 @@ beforeAll(async () => {
       password: '!@MyStrongPassword',
     });
 
-  token = response.body.token;
+  if (response.body.token) {
+    token = response.body.token;
+  }
 });
 
 describe('Authenticated user allowed access to resources', () => {

@@ -1,5 +1,16 @@
 const request = require('supertest');
 const app = require('../../src/routes');
+const models = require('../../src/models');
+
+let database;
+
+beforeAll(async () => {
+  database = await models.sequelize.sync({ force: true });
+});
+
+afterAll(() => {
+  database.close();
+});
 
 describe('Sign up route: /auth/sign-up', () => {
   it('should get validation error (400: Bad Request)', () =>
@@ -14,7 +25,7 @@ describe('Sign up route: /auth/sign-up', () => {
       .set(process.env.API_KEY_NAME, process.env.API_KEY_PASS)
       .send({
         email: 'test-user@example.com',
-        password: '!@MyStrongPassword',
+        password: '!@MyStrongPassword#',
         full_name: 'Agung Dirgantara',
       })
       .expect(200));
@@ -33,7 +44,7 @@ describe('Sign in route: /auth/sign-in', () => {
       .set(process.env.API_KEY_NAME, process.env.API_KEY_PASS)
       .send({
         identity: 'test-user@example.com',
-        password: '!@MyStrongPassword',
+        password: '!@MyStrongPassword#',
       })
       .expect(200));
 });

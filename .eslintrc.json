@@ -5,13 +5,17 @@
     "node": true,
     "jest": true
   },
-  "extends": ["airbnb-base", "prettier"],
+  "extends": [
+    "airbnb-base",
+    "prettier"
+  ],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest"
   },
   "rules": {
     "max-len": "off",
+    "camelcase": "off",
     "no-console": "off",
     "no-unused-vars": "warn"
   }

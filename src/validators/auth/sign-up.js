@@ -1,5 +1,6 @@
 const httpErrors = require('http-errors');
 const { body, validationResult } = require('express-validator');
+const { User } = require('../../models');
 
 /**
  * @typedef {import('express').Request} Request
@@ -16,7 +17,22 @@ module.exports = [
     .bail()
     .isEmail()
     .withMessage('valid-email')
-    .bail(),
+    .bail()
+    .custom((value) =>
+      User.findOne({
+        where: {
+          email: value,
+        },
+      }).then(
+        (user) =>
+          user === null
+            ? Promise.resolve(true)
+            : Promise.reject(new Error('Registered')),
+        Promise.reject,
+      ),
+    )
+    .bail()
+    .withMessage('registered'),
   body('username').optional(),
   body('password')
     .notEmpty()

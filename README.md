@@ -71,7 +71,7 @@ project/
 To run the test suite, first install the dependencies, then run command :
 
 ```bash
-npm test
+npm run test --runInBand
 ```
 
 To run the test coverage report :
