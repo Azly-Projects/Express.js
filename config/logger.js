@@ -6,7 +6,7 @@ module.exports = winston.createLogger({
   handleRejections: true,
   transports: [
     new winston.transports.File({
-      filename: 'logs/all.log',
+      filename: `logs/${process.env.NODE_ENV}/all.log`,
     }),
     new winston.transports.File({
       level: 'error',
@@ -14,12 +14,11 @@ module.exports = winston.createLogger({
         winston.format.label({ label: process.env.NODE_ENV }),
         winston.format.timestamp(),
         winston.format.printf(
-          ({
-            level, message, label, timestamp,
-          }) => `${timestamp} [${label}] ${level}: ${message}`,
+          ({ level, message, label, timestamp }) =>
+            `${timestamp} [${label}] ${level}: ${message}`,
         ),
       ),
-      filename: 'logs/error.log',
+      filename: `logs/${process.env.NODE_ENV}/error.log`,
     }),
   ],
 });

@@ -11,7 +11,6 @@ const { authMiddleware } = require('../middleware');
 
 // * Load routes
 const authRouter = require('./auth');
-const testsRouter = require('./tests');
 const usersRouter = require('./users');
 const errorHandler = require('./error-handler');
 
@@ -27,8 +26,22 @@ app.use(authMiddleware.bearer);
 app.use(authMiddleware.isAuthorized);
 
 // * Initialize route paths
+app
+  .route('/')
+  .get((req, res) => {
+    res.json({
+      status: 'ok',
+    });
+  })
+  .post((req, res) => {
+    res.json({
+      status: 'ok',
+    });
+  })
+  .put(() => {
+    throw new Error('Uknown Error for Test');
+  });
 app.use('/auth', authRouter);
-app.use('/tests', testsRouter);
 app.use('/users', usersRouter);
 
 // * Handle 404 route path

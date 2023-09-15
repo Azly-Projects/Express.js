@@ -30,11 +30,9 @@ module.exports = [
       minUppercase: 0,
     })
     .withMessage('strong-password'),
-  body('full_name')
-    .notEmpty()
-    .withMessage('not-empty')
-    .bail(),
-  (req, res, next) => (!validationResult(req).isEmpty()
-    ? next(httpErrors.BadRequest('validation'))
-    : next()),
+  body('full_name').notEmpty().withMessage('not-empty').bail(),
+  (req, res, next) =>
+    !validationResult(req).isEmpty()
+      ? next(httpErrors.BadRequest('validation'))
+      : next(),
 ];
