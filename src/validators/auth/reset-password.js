@@ -10,8 +10,9 @@ const { body, validationResult } = require('express-validator');
 
 /** @type {ExpressMiddleware[]} */
 module.exports = [
-  body('identity').notEmpty().withMessage('not-empty'),
-  body('password').notEmpty().withMessage('not-empty'),
+  body('token').notEmpty().withMessage('not-empty'),
+  body('new-password').notEmpty().withMessage('not-empty'),
+  body('repeat-new-password').notEmpty().withMessage('not-empty'),
   (req, res, next) =>
     !validationResult(req).isEmpty()
       ? next(httpErrors.BadRequest('validation'))

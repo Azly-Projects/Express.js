@@ -4,9 +4,9 @@ const { JWT } = require('../helper');
 
 const app = express.Router();
 
-app.use(rejectUnauthorized);
+// app.use(rejectUnauthorized);
 
-app.get('/', (req, res) => res.json([]));
+app.get('/', rejectUnauthorized, (req, res) => res.json([]));
 
 app.get('/profile', (req, res) => res.json(JWT.Decode(req.bearerToken)));
 

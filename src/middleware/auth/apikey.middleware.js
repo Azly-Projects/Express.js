@@ -18,9 +18,11 @@ module.exports = [
 
       return true;
     })
-    .withMessage((value) => (value && value !== process.env.API_KEY_PASS
-      ? 'invalid-api-key'
-      : 'not-empty')),
+    .withMessage((value) =>
+      value && value !== process.env.API_KEY_PASS
+        ? 'invalid-api-key'
+        : 'not-empty',
+    ),
   (req, res, next) => {
     // * Validation result
     const errors = validationResult(req);
